@@ -1,0 +1,54 @@
+parameters:
+  scanDir: src/
+  reportDir: report/
+  templateDir: templates/plain
+
+services:
+  dirIterator:
+    class: RecursiveDirectoryIterator
+    arguments: ["%scanDir%"]
+  recursiveIteratorIterator:
+    class: RecursiveIteratorIterator
+    arguments: ["@dirIterator"]
+  fileFilterIterator:
+    class: Graviton\CommentFinder\FileFilterIterator
+    arguments: ["@recursiveIteratorIterator"]
+  mainIterator:
+    class: Graviton\CommentFinder\DispatchingIterator
+    arguments: ["@fileFilterIterator"]
+    calls:
+      - [setDispatcher, ["@dispatcher"]]
+      - [setEventFactory, ["@eventFactory"]]
+
+  phpParser:
+    class: Graviton\CommentFinder\PhpFileParser
+    calls:
+      - [setStore, ["@store"]]
+  unknownParser:
+    class: Graviton\CommentFinder\UnknownFileParser
+    calls:
+      - [setStore, ["@store"]]
+
+  eventFactory:
+    class: Graviton\CommentFinder\EventFactory
+  dispatcher:
+    class: Symfony\Component\EventDispatcher\EventDispatcher
+    calls:
+      - [addListener, ["file.php", ["@phpParser", "parse"]]]
+      - [addListener, ["file.unknown", ["@unknownParser", "parse"]]]
+
+  store:
+    class: Graviton\CommentFinder\Store
+
+  twigLoader:
+    class: Twig_Loader_Filesystem
+    arguments: ["%templateDir%"]
+  twig:
+    class: Twig_Environment
+    arguments: ["@twigLoader"]
+
+  htmlreport:
+    class: Graviton\CommentFinder\HtmlReport
+    arguments: ["@twig", "%reportDir%"]
+    calls:
+      - [setStore, ["@store"]]
