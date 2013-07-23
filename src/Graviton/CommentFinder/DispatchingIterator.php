@@ -68,10 +68,10 @@ class DispatchingIterator extends IteratorIterator
         }
         $this->_dispatcher->dispatch(
             $eventName,
-            $this->_eventFactory->get($record)
+            $this->_eventFactory->get($file)
         );
 
-        return $record;
+        return $file;
     }
 }
 

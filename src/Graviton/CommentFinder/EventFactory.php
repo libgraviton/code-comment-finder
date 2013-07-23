@@ -32,7 +32,7 @@ class EventFactory
      */
     public function get($subject)
     {
-        $event = new Event($subject);
+        return new Event($subject);
     }
 }
 
