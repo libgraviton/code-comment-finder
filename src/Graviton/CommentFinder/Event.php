@@ -1,6 +1,6 @@
 <?php
 /**
- * event factory for dispatching iterator
+ * event
  *
  * @category  Application
  * @package   CommentFinder
@@ -15,7 +15,7 @@ namespace Graviton\CommentFinder;
 use Symfony\Component\EventDispatcher\Event as FrameworkEvent;
 
 /**
- * return events containing subject
+ * event containing subject
  *
  * @category Application
  * @package  CommentFinder
