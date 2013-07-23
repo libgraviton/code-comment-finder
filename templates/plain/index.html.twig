@@ -1,0 +1,9 @@
+{% include 'head.html.twig' %}
+<h2>Index of Reports</h2>
+
+<ul>
+  {% for report in reports %}
+    <li><a href="../{{ report['output'] }}">{{ report['name'] }}</a></li>
+  {% endfor %}
+</ul>
+{% include 'foot.html.twig' %}

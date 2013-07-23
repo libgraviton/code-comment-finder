@@ -1,0 +1,17 @@
+{% include 'head.html.twig' %}
+<h2>Report for {{ file }}</h2>
+
+<table>
+  <tr>
+    <th>Line</th>
+    <th>Comment</th>
+  </tr>
+  {% for comment in comments %}
+  <tr>
+    <td>{{ comment[2] }}</td>
+    <td><pre>
+{{ comment[1]|e }}</pre></td>
+  </tr>
+  {% endfor %}
+</table>
+{% include 'foot.html.twig' %}
