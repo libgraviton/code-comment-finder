@@ -47,8 +47,18 @@ services:
     class: Twig_Environment
     arguments: ["@twigLoader"]
 
-  htmlreport:
+  htmlReport:
     class: Graviton\CommentFinder\HtmlReport
     arguments: ["@twig", "%reportDir%"]
     calls:
       - [setStore, ["@store"]]
+
+  cliApplication:
+    class: Symfony\Component\Console\Application
+    calls:
+      - [add, ["@scanCommand"]]
+  scanCommand:
+    class: Graviton\CommentFinder\ScanCommand
+    calls:
+      - [setIterator, ["@mainIterator"]]
+      - [setRenderer, ["@htmlReport"]]

@@ -9,7 +9,8 @@
         "symfony/config": "*",
         "symfony/yaml": "*",
         "symfony/dependency-injection": "*",
-        "twig/twig": "*"
+        "twig/twig": "*",
+        "symfony/console": "*"
     },
     "require-dev": {
         "libgraviton/codesniffer": "dev-master",
