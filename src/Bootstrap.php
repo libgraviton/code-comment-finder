@@ -18,5 +18,8 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 // set up dependency injection
 $container = new ContainerBuilder();
-$loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/Graviton/CommentFinder'));
+$loader = new YamlFileLoader(
+    $container,
+    new FileLocator(__DIR__.'/Graviton/CommentFinder')
+);
 $loader->load('services.yml');
