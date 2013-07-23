@@ -79,6 +79,9 @@ class HtmlReport
     {
         if (!empty($item['comments'])) {
             $target = sprintf('%s/%s.html', $this->_reportDir, $key);
+            if (!is_dir(dirname($target))) {
+                mkdir(dirname($target), 0755, true);
+            }
             $data = array(
                 'file' => $key,
                 'comments' => $item['comments']
