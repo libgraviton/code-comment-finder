@@ -34,8 +34,8 @@ class UnknownFileParser extends AbstractParser implements ParserInterface
     {
         $file = $event->getSubject();
 
-        $comments = array(0 => 0, 1 => 'unknown file type', 2 => 0);
+        $comment = array(0 => 0, 1 => 'unknown file type', 2 => 0);
 
-        $this->getStore()->add($file, $comments);
+        $this->getStore()->add($file, array($comment));
     }
 }
