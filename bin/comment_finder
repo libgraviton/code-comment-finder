@@ -12,3 +12,12 @@
  */
 
 require_once __DIR__.'/../src/Bootstrap.php';
+
+$iterator = $container->get('mainIterator');
+$report = $container->get('htmlReport');
+
+foreach ($iterator AS $file) {
+ // main loop
+}
+// render
+$report->render();
