@@ -48,7 +48,7 @@ class PhpFileParser extends AbstractParser implements ParserInterface
      */
     private function _filterTokens($token)
     {
-        return $token[0] === T_COMMENT;
+        return $token[0] === T_COMMENT || $token[0] === T_DOC_COMMENT;
     }
 }
 
