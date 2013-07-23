@@ -8,7 +8,8 @@
         "symfony/event-dispatcher": "*",
         "symfony/config": "*",
         "symfony/yaml": "*",
-        "symfony/dependency-injection": "*"
+        "symfony/dependency-injection": "*",
+        "twig/twig": "*"
     },
     "require-dev": {
         "libgraviton/codesniffer": "dev-master",
