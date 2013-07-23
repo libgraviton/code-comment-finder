@@ -1,8 +1,14 @@
 {
     "name": "libgraviton/comment-finder",
     "license": "GPLv3",
+    "autoload": {
+        "psr-0": {"Graviton\\": "src/"}
+    },
     "require": {
-        "symfony/event-dispatcher": "v2.3.0"
+        "symfony/event-dispatcher": "*",
+        "symfony/config": "*",
+        "symfony/yaml": "*",
+        "symfony/dependency-injection": "*"
     },
     "require-dev": {
         "libgraviton/codesniffer": "dev-master",
