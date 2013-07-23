@@ -47,4 +47,14 @@ class Store extends ArrayObject
             $this->_data[$pathname]['comments'] += $comments;
         }
     }
+
+    /**
+     * return all records
+     *
+     * @return void
+     */
+    public function getAll()
+    {
+        return $this->_data;
+    }
 }
