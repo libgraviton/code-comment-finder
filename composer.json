@@ -1,0 +1,11 @@
+{
+    "name": "libgraviton/comment-finder",
+    "license": "GPLv3",
+    "require": {
+        "symfony/event-dispatcher": "v2.3.0"
+    },
+    "require-dev": {
+        "libgraviton/codesniffer": "dev-master",
+        "phpunit/phpunit": "*"
+    }
+}
