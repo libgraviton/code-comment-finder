@@ -2,7 +2,7 @@
 <container xmlns="http://symfony.com/schema/dic/services">
   <parameters>
     <parameter key="programRoot" type="constant">GRAVITON_COMMENTFINDER_ROOT</parameter>
-    <parameter key="scanDir">src/</parameter>
+    <parameter key="scanDir">.</parameter>
     <parameter key="reportDir">report/</parameter>
     <parameter key="templateDir">%programRoot%/templates/plain</parameter>
   </parameters>
