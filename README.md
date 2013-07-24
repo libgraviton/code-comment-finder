@@ -8,8 +8,8 @@ HTML files.
 
 This should install into ```./vendor/bin/comment_finder``` using composer.
 
-It scans the current working directory for files and puts some reports the
-in ```./report``` directory.
+It scans the current working directory for files and puts some reports in
+the ```./report``` directory.
 
 ```sh
 ./vendor/bin/comment_finder scan
