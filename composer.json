@@ -7,7 +7,6 @@
     "require": {
         "symfony/event-dispatcher": "*",
         "symfony/config": "*",
-        "symfony/yaml": "*",
         "symfony/dependency-injection": "*",
         "twig/twig": "*",
         "symfony/console": "*"

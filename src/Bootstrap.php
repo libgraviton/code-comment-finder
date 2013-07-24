@@ -14,12 +14,14 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+
+define('GRAVITON_COMMENTFINDER_ROOT', __DIR__.'/..');
 
 // set up dependency injection
 $container = new ContainerBuilder();
-$loader = new YamlFileLoader(
+$loader = new XmlFileLoader(
     $container,
     new FileLocator(__DIR__.'/Graviton/CommentFinder')
 );
-$loader->load('services.yml');
+$loader->load('services.xml');

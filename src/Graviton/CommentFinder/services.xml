@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services">
+  <parameters>
+    <parameter key="programRoot" type="constant">GRAVITON_COMMENTFINDER_ROOT</parameter>
+    <parameter key="scanDir">src/</parameter>
+    <parameter key="reportDir">report/</parameter>
+    <parameter key="templateDir">%programRoot%/templates/plain</parameter>
+  </parameters>
+
+  <services>
+    <service id="dirIterator" class="RecursiveDirectoryIterator">
+      <argument>%scanDir%</argument>
+    </service>
+    <service id="recursiveIteratorIterator" class="RecursiveIteratorIterator">
+      <argument type="service" id="dirIterator"/>
+    </service>
+    <service id="fileFilterIterator" class="Graviton\CommentFinder\FileFilterIterator">
+      <argument type="service" id="recursiveIteratorIterator"/>
+    </service>
+    <service id="mainIterator" class="Graviton\CommentFinder\DispatchingIterator">
+      <argument type="service" id="fileFilterIterator"/>
+      <call method="setDispatcher">
+        <argument type="service" id="dispatcher"/>
+      </call>
+      <call method="setEventFactory">
+        <argument type="service" id="eventFactory"/>
+      </call>
+    </service>
+
+    <service id="phpParser" class="Graviton\CommentFinder\PhpFileParser">
+      <call method="setStore">
+        <argument type="service" id="store"/>
+      </call>
+    </service>
+    <service id="unknownParser" class="Graviton\CommentFinder\UnknownFileParser">
+      <call method="setStore">
+        <argument type="service" id="store"/>
+      </call>
+    </service>
+
+    <service id="eventFactory" class="Graviton\CommentFinder\EventFactory"/>
+    <service id="dispatcher" class="Symfony\Component\EventDispatcher\EventDispatcher">
+      <call method="addListener">
+        <argument>file.php</argument>
+        <argument type="collection">
+          <argument type="service" id="phpParser"/>
+          <argument>parse</argument>
+        </argument>
+      </call>
+      <call method="addListener">
+        <argument>file.unknown</argument>
+        <argument type="collection">
+          <argument type="service" id="unknownParser"/>
+          <argument>parse</argument>
+        </argument>
+      </call>
+    </service>
+
+    <service id="store" class="Graviton\CommentFinder\Store"/>
+
+    <service id="twigLoader" class="Twig_Loader_Filesystem">
+       <argument>%templateDir%</argument>
+    </service>
+    <service id="twig" class="Twig_Environment">
+       <argument type="service" id="twigLoader"/>
+    </service>
+
+    <service id="htmlReport" class="Graviton\CommentFinder\HtmlReport">
+       <argument type="service" id="twig"/>
+       <argument>%reportDir%</argument>
+       <call method="setStore">
+         <argument type="service" id="store"/>
+       </call>
+    </service>
+
+    <service id="cliApplication" class="Symfony\Component\Console\Application">
+      <call method="add">
+        <argument type="service" id="scanCommand"/>
+      </call>
+    </service>
+    <service id="scanCommand" class="Graviton\CommentFinder\ScanCommand">
+      <call method="setIterator">
+        <argument type="service" id="mainIterator"/>
+      </call>
+      <call method="setRenderer">
+        <argument type="service" id="htmlReport"/>
+      </call>
+    </service>
+  </services>
+</container>
