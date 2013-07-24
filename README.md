@@ -1,14 +1,15 @@
 # Comment Finder
 
 Project to extract comments from a bunch of code and report on it. For now
-This only has support for PHP files and reports are written as a bunch of
+this only has support for PHP files and reports are written as multiple
 HTML files.
 
 ## Usage
 
 This should install into ```./vendor/bin/comment_finder``` using composer.
 
-It scans the current pwd for files and puts some reports in ```./report```.
+It scans the current working directory for files and puts some reports the
+in ```./report``` directory.
 
 ```sh
 ./vendor/bin/comment_finder scan
