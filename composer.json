@@ -15,4 +15,7 @@
         "libgraviton/codesniffer": "dev-master",
         "phpunit/phpunit": "*"
     }
+    "bin": [
+        "bin/comment_finder"
+    ]
 }
