@@ -38,13 +38,7 @@ class ScanCommand extends Command
     {
         $this
             ->setName('scan')
-            ->setDescription('scan a dir and report on comments')
-            ->addArgument(
-                'dir'
-            )
-            ->addArgument(
-                'report'
-            );
+            ->setDescription('scan a dir and report on comments');
     }
 
     /**
@@ -58,7 +52,7 @@ class ScanCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         foreach ($this->_iterator AS $file) {
-            // main loop
+            // main loop, does work, please ignore pmd unused local warning
         }
         $this->_renderer->render();
     }
@@ -87,3 +81,4 @@ class ScanCommand extends Command
         $this->_renderer = $renderer;
     }
 }
+
