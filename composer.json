@@ -1,5 +1,5 @@
 {
-    "name": "libgraviton/comment-finder",
+    "name": "libgraviton/code-comment-finder",
     "license": "GPLv3",
     "autoload": {
         "psr-0": {"Graviton\\": "src/"}
