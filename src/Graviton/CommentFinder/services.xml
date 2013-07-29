@@ -2,7 +2,7 @@
 <container xmlns="http://symfony.com/schema/dic/services">
   <parameters>
     <parameter key="programRoot" type="constant">GRAVITON_COMMENTFINDER_ROOT</parameter>
-    <parameter key="scanDir">.</parameter>
+    <parameter key="scanDir">src</parameter>
     <parameter key="reportDir">report/</parameter>
     <parameter key="templateDir">%programRoot%/templates/plain</parameter>
   </parameters>
@@ -32,6 +32,11 @@
         <argument type="service" id="store"/>
       </call>
     </service>
+    <service id="cParser" class="Graviton\CommentFinder\CFileParser">
+      <call method="setStore">
+        <argument type="service" id="store"/>
+      </call>
+    </service>
     <service id="unknownParser" class="Graviton\CommentFinder\UnknownFileParser">
       <call method="setStore">
         <argument type="service" id="store"/>
@@ -44,6 +49,13 @@
         <argument>file.php</argument>
         <argument type="collection">
           <argument type="service" id="phpParser"/>
+          <argument>parse</argument>
+        </argument>
+      </call>
+      <call method="addListener">
+        <argument>file.c</argument>
+        <argument type="collection">
+          <argument type="service" id="cParser"/>
           <argument>parse</argument>
         </argument>
       </call>

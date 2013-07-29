@@ -61,7 +61,11 @@ class DispatchingIterator extends IteratorIterator
 
         switch ($file->getExtension()) {
             case 'php':
+            case 'phtml':
                 $eventName = 'file.php';
+                break;
+            case 'js':
+                $eventName = 'file.c';
                 break;
             default:
                 $eventName = 'file.unknown';
